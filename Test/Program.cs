@@ -11,23 +11,27 @@ namespace Test {
 	class Program {
 		static Random Rand = new Random();
 
-		static void SomeProperty(IntPtr VM) {
-			WrenVM.ReturnString(VM, "Hello Wren World #" + Rand.Next(1, 100) + "!");
+		static void SomeFunction(WrenVM VM) {
+			VM.ReturnString("Hello " + VM.GetArgumentString(1) + " World #" + Rand.Next(1, 100) + "!");
+		}
+
+		static WrenForeignMethodFn BindForeignMethod(WrenVM VM, string Module, string ClassName, bool Static, string Sig) {
+			if (ClassName == "DotNet" && Sig == "SomeFunction(_)" && Static)
+				return SomeFunction;
+			return null;
+		}
+
+		static string LoadModule(WrenVM VM, string Module) {
+			if (File.Exists(Module))
+				return File.ReadAllText(Module);
+			return "";
 		}
 
 		static void Main(string[] args) {
 			Console.Title = "Wren.NET Test";
 
-			WrenVM WVM = new WrenVM(new WrenConfig((VM, Module, ClassName, Static, Sig) => {
-				WrenVM W = new WrenVM(VM);
-				if (ClassName == "DotNet" && Sig == "SomeProperty" && Static)
-					return WrenVM.ToFuncPtr(SomeProperty);
-				return IntPtr.Zero;
-			}, (VM, Module) => {
-				if (File.Exists(Module))
-					return File.ReadAllText(Module);
-				return "";
-			}));
+			WrenConfig Cfg = new WrenConfig(BindForeignMethod, LoadModule);
+			WrenVM WVM = Cfg.NewVM();
 
 			string Test = File.ReadAllText("test.wren");
 			Console.WriteLine("{0}\n\n----------", Test);

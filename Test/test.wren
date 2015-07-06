@@ -1,7 +1,6 @@
 ﻿class DotNet {
-	foreign static SomeProperty
+	foreign static SomeFunction(a)
 }
 
-for (i in 0 .. 10) {
-	IO.print(DotNet.SomeProperty)
-}
+var Stringe = "ABC"
+IO.print(DotNet.SomeFunction(Stringe))
