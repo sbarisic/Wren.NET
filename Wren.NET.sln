@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wren.NET", "Wren.NET\Wren.NET.csproj", "{08EAFFBF-CC81-4C96-8DDC-DB1D40F2A6A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{F78CEF5B-125A-49E3-AEB3-287912DC453B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{08EAFFBF-CC81-4C96-8DDC-DB1D40F2A6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08EAFFBF-CC81-4C96-8DDC-DB1D40F2A6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08EAFFBF-CC81-4C96-8DDC-DB1D40F2A6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78CEF5B-125A-49E3-AEB3-287912DC453B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78CEF5B-125A-49E3-AEB3-287912DC453B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78CEF5B-125A-49E3-AEB3-287912DC453B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78CEF5B-125A-49E3-AEB3-287912DC453B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
