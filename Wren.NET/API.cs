@@ -84,14 +84,14 @@ namespace WrenNET {
 		[DllImport(DllName, CallingConvention = CConv, CharSet = CSet)]
 		internal static extern string wrenGetArgumentString(IntPtr VM, int Idx);
 
-		[DllImport(DllName, CallingConvention = CConv, CharSet = CSet)]
-		internal static extern void wrenReturnBool(IntPtr VM, bool Val);
+		[DllImport(DllName, EntryPoint = "wrenReturnBool", CallingConvention = CConv, CharSet = CSet)]
+		public static extern void ReturnBool(IntPtr VM, bool Val = false);
 
-		[DllImport(DllName, CallingConvention = CConv, CharSet = CSet)]
-		internal static extern void wrenReturnDouble(IntPtr VM, double Val);
+		[DllImport(DllName, EntryPoint = "wrenReturnDouble", CallingConvention = CConv, CharSet = CSet)]
+		public static extern void ReturnDouble(IntPtr VM, double Val = 0.0);
 
-		[DllImport(DllName, CallingConvention = CConv , CharSet = CSet)]
-		internal static extern void wrenReturnString(IntPtr VM, string Txt, int Len = -1);
+		[DllImport(DllName, EntryPoint = "wrenReturnString", CallingConvention = CConv, CharSet = CSet)]
+		public static extern void ReturnString(IntPtr VM, string Txt = "", int Len = -1);
 
 		public static IntPtr ToFuncPtr(WrenBindForeignMethodFn Fn) {
 			return ToFuncPtr((Delegate)Fn);
@@ -141,16 +141,16 @@ namespace WrenNET {
 		}
 
 
-		public void Return(bool Val) {
-			wrenReturnBool(VMPtr, Val);
+		public void Return(bool Val = false) {
+			ReturnBool(VMPtr, Val);
 		}
 
-		public void Return(double Val) {
-			wrenReturnDouble(VMPtr, Val);
+		public void Return(double Val = 0.0) {
+			ReturnDouble(VMPtr, Val);
 		}
 
-		public void Return(string Val) {
-			wrenReturnString(VMPtr, Val);
+		public void Return(string Val = "") {
+			ReturnString(VMPtr, Val);
 		}
 
 		public override string ToString() {

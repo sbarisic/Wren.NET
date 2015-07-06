@@ -1,6 +1,7 @@
-﻿
-class DotNet {
-	foreign static WrenMethod
+﻿class DotNet {
+	foreign static SomeProperty
 }
 
-IO.print(DotNet.WrenMethod)
+for (i in 0 .. 10) {
+	IO.print(DotNet.SomeProperty)
+}

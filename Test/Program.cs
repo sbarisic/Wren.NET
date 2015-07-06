@@ -9,9 +9,10 @@ using WrenNET;
 
 namespace Test {
 	class Program {
-		static void WrenMethod(IntPtr VM) {
-			WrenVM W = new WrenVM(VM);
-			//W.Return("Hello Wren.NET World!");
+		static Random Rand = new Random();
+
+		static void SomeProperty(IntPtr VM) {
+			WrenVM.ReturnString(VM, "Hello Wren World #" + Rand.Next(1, 100) + "!");
 		}
 
 		static void Main(string[] args) {
@@ -19,10 +20,8 @@ namespace Test {
 
 			WrenVM WVM = new WrenVM(new WrenConfig((VM, Module, ClassName, Static, Sig) => {
 				WrenVM W = new WrenVM(VM);
-
-				if (ClassName == "DotNet" && Sig == "WrenMethod" && Static)
-					return WrenVM.ToFuncPtr(WrenMethod);
-
+				if (ClassName == "DotNet" && Sig == "SomeProperty" && Static)
+					return WrenVM.ToFuncPtr(SomeProperty);
 				return IntPtr.Zero;
 			}, (VM, Module) => {
 				if (File.Exists(Module))
@@ -30,9 +29,9 @@ namespace Test {
 				return "";
 			}));
 
-			WVM.Interpret("Test", File.ReadAllText("test.wren"));
-
-			Console.WriteLine("Done!");
+			string Test = File.ReadAllText("test.wren");
+			Console.WriteLine("{0}\n\n----------", Test);
+			WVM.Interpret("Test", Test);
 			Console.ReadLine();
 		}
 	}
