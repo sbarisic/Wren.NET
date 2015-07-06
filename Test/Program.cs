@@ -12,12 +12,14 @@ namespace Test {
 		static Random Rand = new Random();
 
 		static void SomeFunction(WrenVM VM) {
-			VM.ReturnString("Hello " + VM.GetArgumentString(1) + " World #" + Rand.Next(1, 100) + "!");
+			VM.ReturnString("Hello Wren World #" + Rand.Next(1, 100) + "!");
 		}
 
 		static WrenForeignMethodFn BindForeignMethod(WrenVM VM, string Module, string ClassName, bool Static, string Sig) {
-			if (ClassName == "DotNet" && Sig == "SomeFunction(_)" && Static)
-				return SomeFunction;
+			if (ClassName == "DotNet" && Static) {
+				if (Sig == "SomeFunction()")
+					return SomeFunction;
+			}
 			return null;
 		}
 
