@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Wren {
-	public class Wrn {
+	public class WrenVM {
 	}
 }
